@@ -58,8 +58,7 @@ const Cart: React.FC = () => {
       products: allOrder,
     };
 
-    console.log(data);
-    // createOrder(data);
+    createOrder(data);
   };
 
   return (
