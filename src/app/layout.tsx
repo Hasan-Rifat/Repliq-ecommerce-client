@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import Header from "@/shared/Header";
 import Footer from "@/shared/Footer";
 import ReactProvider from "../../Redux/ReactProvider";
+import { Toaster } from "react-hot-toast";
 
 const josefin = Josefin_Sans({
   subsets: ["latin-ext"],
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className={josefin.className}>
         <ReactProvider>
           <Header />
+          <Toaster />
           {children}
           <Footer />
         </ReactProvider>

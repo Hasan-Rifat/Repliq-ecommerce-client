@@ -1,22 +1,32 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CgChevronDownO } from "react-icons/cg";
+import { useRouter } from "next/navigation";
+import Loading from "./Loading";
 
 const Header: React.FC = () => {
   const [mobile, SetMobile] = useState<boolean>(false);
   const [color, setColor] = useState<boolean>(false);
   const [dashboard, setDashboard] = useState<boolean>(false);
+  const router = useRouter();
+
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  if (!hydrated) {
+    return null;
+  }
 
   const logout = () => {
-    //
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+    }
+    router.refresh();
   };
 
-  /*   if (loading) {
-    return <Loading />;
-  } */
-
-  const user = false;
+  const user = typeof window !== "undefined" && localStorage.getItem("user");
 
   // menu
 
@@ -26,27 +36,18 @@ const Header: React.FC = () => {
         <Link href={"/"}>Home </Link>
       </li>
       <li className="mr-[10px] p-[10px] text-primary">
-        <Link href={"/our-portfolio"}>Our Portfolio</Link>
+        <Link href={"/product"}>Products</Link>
       </li>
       <li className="mr-[10px] p-[10px] text-primary">
-        <Link href={"/our-services"}>Our Services</Link>
+        <Link href={"/cart"}>Cart</Link>
       </li>
-      <li className="mr-[10px] p-[10px] text-primary">
-        <Link href={"/contact-us"}>Contact Us</Link>
-      </li>
+
       {user ? (
         <div className="relative flex justify-center items-center ">
           <div
             onClick={() => setDashboard(!dashboard)}
             className="cursor-pointer flex gap-2 items-center  online "
           >
-            {/* {user?.displayName && (
-              <div className=" rounded-full  text-red-600 bg-primary">
-                <h2 className="font-bold text-[18px] text-center px-[15px]">
-                  {user?.displayName}
-                </h2>
-              </div>
-            )} */}
             <CgChevronDownO className="cursor-pointer " />
           </div>
           <div
@@ -65,11 +66,10 @@ const Header: React.FC = () => {
           </div>
         </div>
       ) : (
-        <Link
-          className="cursor-pointer hover:translate-y-[-5px] ease-in-out duration-300 hover:shadow-[0px_4px_80px_rgba(0,0,0,0.1)] bg-[#fb2e86] rounded-[5px] mr-[10px] xss:text-center xss:px-[15px] md:px-[47px] py-[8px] text-white bg-primary  hover:bg-secondary"
-          href={"/login"}
-        >
-          <button>Login</button>
+        <Link href={"/login"} className="flex items-center">
+          <button className="cursor-pointer hover:translate-y-[-5px] ease-in-out duration-300 hover:shadow-[0px_4px_80px_rgba(0,0,0,0.1)] bg-[#fb2e86] rounded-[5px] mr-[10px] xss:text-center xss:px-[15px] md:px-[47px] py-[2px] text-white bg-primary  hover:bg-secondary">
+            Login
+          </button>
         </Link>
       )}
     </>

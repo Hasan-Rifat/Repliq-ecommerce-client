@@ -17,7 +17,7 @@ interface Props {
   isError?: boolean;
 }
 
-const FeaturedProducts: React.FC<Props> = () => {
+const FeaturedProducts: React.FC = () => {
   const { error, isLoading, data } = useGetAllProductQuery({}, {}) as Props;
 
   let product;

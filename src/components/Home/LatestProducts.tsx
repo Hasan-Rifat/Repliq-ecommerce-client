@@ -16,7 +16,7 @@ interface LatestProductsProps {
   isError?: boolean;
 }
 
-const LatestProducts: React.FC<LatestProductsProps> = () => {
+const LatestProducts: React.FC = () => {
   const { error, isError, isLoading, data } = useGetAllProductQuery(
     {},
     {}
