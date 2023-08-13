@@ -9,24 +9,18 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../../../../../Redux/features/cart/cartSlice";
 
 type ProductProps = {
-  error?: ApiResponse;
-  isLoading: boolean;
-  data?: {
-    data: Item;
-  };
-  isError?: boolean;
   params: {
-    id(id: string, arg1: {}): unknown;
+    id: string;
     slug: string;
   };
 };
 
-const Product: React.FC<ProductProps> = ({ params }) => {
+const ProductDetails: React.FC<ProductProps> = ({ params }) => {
   const dispatch = useDispatch();
   const { isLoading, error, data } = useGetSingleProductQuery(
     params.id,
     {}
-  ) as unknown as ProductProps;
+  ) as unknown as any;
 
   let product;
 
@@ -193,4 +187,4 @@ const Product: React.FC<ProductProps> = ({ params }) => {
     </section>
   );
 };
-export default Product;
+export default ProductDetails;

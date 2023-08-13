@@ -16,7 +16,7 @@ type pageProps = {
   isError?: boolean;
 };
 
-const ProductDetails: React.FC = () => {
+const Product: React.FC = () => {
   const { error, isLoading, data } = useGetAllProductQuery({}, {}) as pageProps;
 
   let product;
@@ -86,4 +86,4 @@ const ProductDetails: React.FC = () => {
     </section>
   );
 };
-export default ProductDetails;
+export default Product;
