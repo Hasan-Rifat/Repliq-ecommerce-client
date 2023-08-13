@@ -1,10 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { store } from "../../redux/store";
+import { Inter, Josefin_Sans } from "next/font/google";
 import { Provider } from "react-redux";
+import Header from "@/shared/Header";
+import Footer from "@/shared/Footer";
+import ReactProvider from "../../Redux/ReactProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const josefin = Josefin_Sans({
+  subsets: ["latin-ext"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +22,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Provider store={store}>{children}</Provider>
+      <body className={josefin.className}>
+        <ReactProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ReactProvider>
       </body>
     </html>
   );

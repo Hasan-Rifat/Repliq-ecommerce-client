@@ -9,7 +9,7 @@ const productApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    getProduct: builder.query({
+    getAllProduct: builder.query({
       query: () => ({
         url: "/product/",
         method: "GET",
@@ -39,7 +39,7 @@ const productApi = apiSlice.injectEndpoints({
 
 export const {
   useCreateProductMutation,
-  useGetProductQuery,
+  useGetAllProductQuery,
   useGetSingleProductQuery,
   useUpdateProductMutation,
   useDeleteProductMutation,
